@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"></conversionRule>
+	
+	<property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %clr(%5level) %cyan(%logger) - %msg%n" />
+	
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.wecoms24.flow" level="INFO" />
+	<logger name="org.springframework" level="INFO" />
+	<logger name="org.mybatis" level="INFO" />
+	<logger name="org.hibernate" level="INFO" />
+	<logger name="org.springframework.web.socket.config.WebSocketMessageBrokerStats" level="ERROR" />
+	<logger name="org.springframework.web.socket.sockjs.client.SockJsClient" level="OFF" />
+	<logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="ERROR" />
+	
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+	</root>
+</configuration>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5level %logger - %msg%n" />
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>/app/wecoms/counsel-flow-app-logs/counsel-flow-app-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>50MB</maxFileSize>
+            <maxHistory>14</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+	<logger name="com.wecoms24.flow" level="INFO" />
+	<logger name="org.springframework" level="INFO" />
+	<logger name="org.mybatis" level="INFO" />
+	<logger name="org.hibernate" level="INFO" />
+	<logger name="org.springframework.web.socket.config.WebSocketMessageBrokerStats" level="ERROR" />
+	<logger name="org.springframework.web.socket.sockjs.client.SockJsClient" level="OFF" />
+	<logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="ERROR" />
+	
+    <root level="INFO">
+	    <appender-ref ref="FILE" />
+	</root>
+</configuration>

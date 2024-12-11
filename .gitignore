@@ -32,16 +32,15 @@ replay_pid*
 .apt_generated
 .apt_generated_tests
 .idea
-target
-etc
+*/target/*
+*/etc/*
+*/.git/*
+.git
 node
 node_modules
-log**
-plugins
-downloads
-temp
-package-lock.json
-tomcat
+/log**/
+/temp/
+/tomcat/
 .DS_Store
 *.iml
 
