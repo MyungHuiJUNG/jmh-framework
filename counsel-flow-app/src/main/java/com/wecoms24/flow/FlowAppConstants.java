@@ -1,6 +1,7 @@
 package com.wecoms24.flow;
 
 public interface FlowAppConstants {
+	public static final String GIT_TEST = "GitTest";
 	public static final String FLOW_PACKAGE = "com.wecoms24.flow";
 	public static final String REDIS_PACKAGE = FLOW_PACKAGE + ".redis";
 	public static final String REDIS_ENABLE = REDIS_PACKAGE + ".enable";
