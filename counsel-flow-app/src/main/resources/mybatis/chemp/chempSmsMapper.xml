@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chempsms">
+	<resultMap id="chempSmsResultMap" type="com.wecoms24.flow.chemp.sms.ChempSms">
+		<id 	property="entityId"				column="SMS_SN"/>
+	    <result property="smsType" 				column="SMS_TYPE"/>
+	    <result property="senderNumber" 		column="SENDER"/>
+	    <result property="receiverType" 		column="RECV_GUBUN"/>
+	    <result property="receiverNumber" 		column="RCVER"/>
+	    <result property="subject" 				column="SMS_SJ"/>
+	    <result property="contents" 			column="SMS_CONTENTS"/>
+	    <result property="transmitType" 		column="SMS_SE"/>
+	    <result property="reservationDate" 		column="SMS_DATE"/>
+	    <result property="usable" 				column="USE_AT" 		javaType="java.lang.Boolean" jdbcType="VARCHAR" typeHandler="com.wecoms24.flow.core.template.mybatis.BooleanStringTypeHandler"/>
+	    <result property="createdDate" 			column="REG_DT"/>
+	    <result property="registUserId" 		column="REGUSR"/>
+	    <result property="lastModifiedDate" 	column="UPD_DT"/>
+	    <result property="modifyUserId" 		column="UPDUSR"/>
+	</resultMap>
+	
+	<sql id="selectMaster">
+		SELECT T1.* FROM (
+			SELECT
+				  ROW_NUMBER() OVER ( <include refid="orderBy"/> ) AS RNUM
+				, SMS_SN
+				, SMS_TYPE
+				, SENDER
+				, RECV_GUBUN
+				, RCVER
+				, SMS_SJ
+				, SMS_CONTENTS
+				, SMS_SE
+				, SMS_DATE
+				, USE_AT
+				, REG_DT
+				, REGUSR
+				, UPD_DT
+				, UPDUSR
+			FROM EM_TRAN_RCEPT
+			<include refid="where"/>
+		) T1
+		<where>
+        	<if test="pageParam != null and pageParam.startRowNum != null and pageParam.startRowNum > 0 and pageParam.endRowNum != null and pageParam.endRowNum > 0">
+		    	AND T1.RNUM BETWEEN #{pageParam.startRowNum} AND #{pageParam.endRowNum}
+	     	</if>
+        </where>
+	</sql>
+	
+	<sql id="select">
+		SELECT
+			    T1.*
+		FROM (<include refid="selectMaster"/>) T1
+		<include refid="orderBy"/>
+	</sql>
+	
+	<sql id="selectOne">
+        SELECT T1.* FROM (<include refid="select"/>) T1
+    </sql>
+    
+	<sql id="where">
+		<where>
+			<if test="entityId != null and entityId > 0">
+				SMS_SN = #{entityId}
+			</if>
+			<if test="searchParameter != null">
+				<if test="searchParameter.entity.entityId != null and searchParameter.entity.entityId > 0">
+					SMS_SN = #{searchParameter.entity.entityId}
+				</if>
+				<if test="searchParameter.entityIds != null and !searchParameter.entityIds.isEmpty()">
+					SMS_SN IN
+					<foreach item="entityId" index="index" collection="searchParameter.entityIds" open="(" separator="," close=")">
+						#{entityId}
+					</foreach>
+				</if>
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="orderBy">
+		ORDER BY
+		<choose>
+			<when test="searchParameter != null and searchParameter.sort != null and searchParameter.sort.orders != null and !searchParameter.sort.orders.isEmpty()">
+				<foreach item="order" index="index" collection="searchParameter.sort.orders" separator=",">
+					${order.property} ${order.direction}
+				</foreach>
+			</when>
+			<otherwise>
+				SMS_SN ASC 
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="find" parameterType="com.wecoms24.flow.core.template.mybatis.MapperParameter" resultMap="chempSmsResultMap">
+		<include refid="select"/>
+	</select>
+	
+    <select id="findOne" parameterType="com.wecoms24.flow.core.template.mybatis.MapperParameter" resultMap="chempSmsResultMap">
+        <include refid="selectOne"/>
+    </select>
+    
+    <insert id="save" parameterType="com.wecoms24.flow.core.template.mybatis.MapperParameter" useGeneratedKeys="true" keyProperty="chempSms.entityId">
+    	INSERT INTO EM_TRAN_RCEPT (
+			  SMS_TYPE
+			, SENDER
+			, RECV_GUBUN
+			, RCVER
+			, SMS_SJ
+			, SMS_CONTENTS
+			, SMS_SE
+			, SMS_DATE
+			, USE_AT
+			, REG_DT
+			, REGUSR
+			, UPD_DT
+			, UPDUSR
+    	)
+		VALUES (
+			  #{chempSms.smsType, 			jdbcType=INTEGER}
+			, #{chempSms.senderNumber, 		jdbcType=VARCHAR}
+			, #{chempSms.receiverType, 		jdbcType=VARCHAR}
+			, #{chempSms.receiverNumber, 	jdbcType=VARCHAR}
+			, #{chempSms.subject, 			jdbcType=VARCHAR}
+			, #{chempSms.contents, 			jdbcType=VARCHAR}
+			, #{chempSms.transmitType, 		jdbcType=VARCHAR}
+			, #{chempSms.reservationDate}
+			<if test="chempSms.usable != null">
+		  		<if test="chempSms.getUsable() == true">
+		  			, 'Y'
+		  		</if>
+		  		<if test="chempSms.getUsable() == false">
+		  			, 'N'
+		  		</if>
+		  	</if>
+			, NOW()
+			, #{user.id}
+			, NOW()
+			, #{user.id}
+		)
+    </insert>
+    
+    <update id="update" parameterType="com.wecoms24.flow.core.template.mybatis.MapperParameter">
+    	UPDATE EM_TRAN_RCEPT
+		<set>
+		  	  UPD_DT = NOW()
+		  	, UPDUSR = #{user.id}
+		  	<if test="chempSms.usable != null">
+		  		<if test="chempSms.getUsable() == true">
+		  			, USE_AT = 'Y'
+		  		</if>
+		  		<if test="chempSms.getUsable() == false">
+		  			, USE_AT = 'N'
+		  		</if>
+		  	</if>
+	  	</set>
+	  	<where>
+	  		SMS_SN = #{chempSms.entityId}
+	  	</where>
+    </update>
+    
+    <delete id="delete" parameterType="com.wecoms24.flow.core.template.mybatis.MapperParameter">
+    	DELETE 
+    	FROM EM_TRAN_RCEPT
+		<where>
+			<choose>
+				<when test="searchParameter != null and searchParameter.entityIds != null and !searchParameter.entityIds.isEmpty()">
+					SMS_SN IN
+					<foreach item="entityId" index="index" collection="searchParameter.entityIds" open="(" separator="," close=")">
+						#{entityId}
+					</foreach>
+				</when>
+				<otherwise>
+					SMS_SN = #{searchParameter.entity.entityId}
+				</otherwise>
+			</choose>
+		</where>
+    </delete>
+    
+    <select id="totalCount" resultType="map">
+		SELECT COUNT(T1.SMS_SN) AS TOTALCOUNT
+        FROM (
+        	SELECT
+				  ROW_NUMBER() OVER ( <include refid="orderBy"/> ) AS RNUM
+				, SMS_SN
+				, SMS_TYPE
+				, SENDER
+				, RECV_GUBUN
+				, RCVER
+				, SMS_SJ
+				, SMS_CONTENTS
+				, SMS_SE
+				, SMS_DATE
+				, USE_AT
+				, REG_DT
+				, REGUSR
+				, UPD_DT
+				, UPDUSR
+			FROM EM_TRAN_RCEPT
+			<include refid="where"/>
+        ) T1
+	</select>
+</mapper>

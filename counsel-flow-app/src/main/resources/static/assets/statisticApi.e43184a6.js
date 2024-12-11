@@ -1,0 +1,1 @@
+import{api as s}from"./axios.816e1a60.js";import{g as e}from"./header.10137493.js";const r=t=>s.get("/rest/api/v1/ticket/statistics/by-counsel-types",{headers:e().headers,params:t}),a=t=>s.get("/rest/api/v1/ticket/statistics/by-users",{headers:e().headers,params:t}),p={getStatisticsByCounselType:r,getStatisticsByUsers:a};export{p as s};

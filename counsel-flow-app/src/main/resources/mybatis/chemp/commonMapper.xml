@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common">
+	<select id="selectKeys" parameterType="com.wecoms24.flow.core.template.mybatis.MapperParameter" resultType="Integer">
+		SELECT
+			${sequenceName}.NEXTVAL
+		FROM
+			DUAL
+		CONNECT BY
+			LEVEL <![CDATA[<=]]> #{keyCount} 
+	</select>
+</mapper>

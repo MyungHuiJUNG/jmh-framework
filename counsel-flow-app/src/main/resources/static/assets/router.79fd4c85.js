@@ -1,0 +1,1 @@
+import{b as a}from"./index.02f7c95d.js";import{u as m}from"./authStore.fadf8446.js";import"./axios.816e1a60.js";import"./header.10137493.js";const p=a(({router:e})=>{const i=m();e.beforeEach((r,s,o)=>{const n=r.meta.public;i.checkLoginStatus().then(u=>{const t=u.loggedIn;return n?t&&r.name==="login"?o({name:"main"}):o():t?o():o({name:"login"})})})});export{p as default};

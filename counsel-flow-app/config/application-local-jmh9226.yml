@@ -1,0 +1,50 @@
+server:
+  port: 8080
+  servlet: 
+    context-path: /
+spring:
+  config:
+    activate:
+      on-profile: local-jmh9226
+  datasource:
+    main:
+      url: jdbc:mariadb://localhost:3306/wecoms_dev?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: wecoms_dev
+      password: wecoms_dev
+      driver-class-name: org.mariadb.jdbc.Driver
+      hikari:
+        maximum-pool-size: 5
+        connection-timeout: 20000
+      jpa:
+        show-sql: true
+        hibernate:
+          ddl-auto: update
+          format-sql: false
+    chemp:
+      url: jdbc:mariadb://localhost:3306/nechemp?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: nechemp
+      password: nechemp
+      driver-class-name: org.mariadb.jdbc.Driver
+      hikari:
+        maximum-pool-size: 5
+        connection-timeout: 20000
+com: 
+   wecoms24: 
+     flow: 
+       isMasterServer: true
+       redis: 
+         enable: true
+         mode: CLUSTER
+         cluster:
+           nodes:
+             - 127.0.0.1:6379
+             - 127.0.0.1:6380
+             - 127.0.0.1:6381
+         broadcaster: 
+           enable: true
+           topics: 
+             - /topic/regist-notice
+             - /topic/transmit-ticket
+             - /topic/send-message
+             - /topic/callback-ticket
+             - /topic/request/init-password

@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: counsel-flow-app
+  config:
+    import: optional:classpath:initial-data.yml
+  profiles:
+    active: local
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  messages: 
+    basename: messages/messages
+    encoding: UTF-8
+  jwt:
+    accessKey: 9d26dd1c104512432d1c6aa62d02302e223f567d99517dfa80735debfbda5bc0dd0576b4c560e7e8afc70761baaf5fbd95589473b7613eed31120d0585a04f79
+    refreshKey: 8b23f2ba9929207b94b14e42cc967446d77dcc1264297e713626fb7320e4aabc70f7f510bf9db659166205bcb508cc39da8415cc8b208d23f3d6a766a4a26a0a
+  servlet:
+    multipart:
+      maxFileSize: -1
+      maxRequestSize: -1
+
+server:
+  port: 10202
+  servlet: 
+    context-path: /
+  compression: 
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,text/css 
+
+com: 
+  wecoms24: 
+    flow: 
+      security: 
+        ant-machers: /ws/**, /rest/api/v1/auth/login:POST, /rest/api/v1/auth/token:POST, /rest/api/v1/task/request/requests/request-init-password:POST, /rest/api/v1/callback/ticket/tickets:POST
+      core:
+        file:
+          host: http://localhost:9000
+          urlRootPath: /rest/api/v1/file/files
+logging:
+  config: config/logback-${spring.profiles.active}.xml

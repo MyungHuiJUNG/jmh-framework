@@ -1,0 +1,1 @@
+function n(e){return e.replace(/<\/?[^>]+(>|$)/g,"")}function r(e){return e.replace(/<img[^>]*>(.*?)<\/img>|<\/?[^>]+(>|$)/g,"")}const t={removeHtmlTags:n,removeHtmlTagsIncludingImg:r};export{t as u};

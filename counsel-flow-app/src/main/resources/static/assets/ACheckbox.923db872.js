@@ -1,0 +1,1 @@
+import{X as u,o as d,c as s,D as m}from"./index.02f7c95d.js";const r={__name:"ACheckbox",props:{modelValue:{},modelModifiers:{}},emits:["update:modelValue"],setup(l){const e=u(l,"modelValue");return(t,o)=>(d(),s(m,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=a=>e.value=a),dense:""},null,8,["modelValue"]))}};export{r as default};

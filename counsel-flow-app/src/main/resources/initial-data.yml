@@ -1,0 +1,881 @@
+initial-data:
+  systemVariables:
+    - key: "jwt-token-expiration"
+      displayName: "로그인 유효 기간"
+      description: "로그인 유효 기간 설정"
+      editable: false
+      children:
+        - key: "base-expiration-time"
+          displayName: "기본 로그인 유효시간"
+          description: "로그인 시, 분단위의 유효시간을 설정한다."
+          editable: true
+          editType: "int"
+          type: "Integer"
+          value: "540"
+
+        - key: "extend-expiration-time"
+          displayName: "로그인 연장시간"
+          description: "분단위의 로그인 연장시간을 설정한다."
+          editable: true
+          editType: "int"
+          type: "Integer"
+          value: "60"
+
+        - key: "refresh-expiration-time"
+          displayName: "최대 로그인 유효시간"
+          description: "처음 로그인 시점으로부터 분단위의 최대 유효시간을 설정한다.(하루를 넘기지 않는것을 권장)"
+          editable: false
+          editType: "int"
+          type: "Integer"
+          value: "1380"
+
+    - key: "cti-server-info"
+      displayName: "CTI 서버 정보"
+      description: "CTI 서버 정보 설정"
+      editable: false
+      children:
+        - key: "cti-server-app-name"
+          displayName: "CTI Server App Name"
+          description: "CTI서버의 App Name을 설정한다."
+          editable: true
+          editType: "edit"
+          type: "String"
+          value: "CounselFlowApp"
+
+        - key: "cti-server-tenant-name"
+          displayName: "CTI Server Tenant Name"
+          description: "CTI 서버의 Tenant Name을 설정한다."
+          editable: true
+          editType: "edit"
+          type: "String"
+          value: "KEITI"
+
+        - key: "cti-server-protocol"
+          displayName: "CTI Server Protocol"
+          description: "CTI서버의 Protocol을 설정한다."
+          editable: true
+          editType: "select"
+          editItem: "http, https"
+          type: "String"
+          value: "http"
+
+        - key: "cti-server-active-host"
+          displayName: "CTI Active Server Host"
+          description: "CTI Active서버의 Host를 설정한다."
+          editable: true
+          editType: "edit"
+          type: "String"
+          value: "172.25.11.62"
+
+        - key: "cti-server-active-port"
+          displayName: "CTI Active Server Port"
+          description: "CTI Active서버의 Port를 설정한다."
+          editable: true
+          editType: "int"
+          type: "Integer"
+          value: "9202"
+
+        - key: "cti-server-standby-host"
+          displayName: "CTI Standby Server Host"
+          description: "CTI Standby서버의 Host를 설정한다."
+          editable: true
+          editType: "edit"
+          type: "String"
+          value: "172.25.11.62"
+
+        - key: "cti-server-standby-port"
+          displayName: "CTI Standby Server Port"
+          description: "CTI Standby서버의 Port를 설정한다."
+          editable: true
+          editType: "int"
+          type: "Integer"
+          value: "9203"
+
+  codes:
+    - codeType: "SYSTEM"
+      code: "CODE_TYPE"
+      name: "코드유형"
+      orderNumber: 1
+      children:
+        - code: "SYSTEM"
+          name: "시스템"
+          orderNumber: 1
+
+        - code: "SERVICE"
+          name: "서비스"
+          orderNumber: 2
+
+    - codeType: "SYSTEM"
+      code: "MENU_ACTION_TYPE"
+      name: "메뉴 액션 타입"
+      orderNumber: 2
+      children:
+        - code: "TAB"
+          name: "탭"
+          orderNumber: 1
+
+        - code: "POPUP"
+          name: "팝업(레이어)"
+          orderNumber: 2
+
+        - code: "WINDOW"
+          name: "팝업(윈도우)"
+          orderNumber: 3
+
+        - code: "NONE"
+          name: "없음"
+          orderNumber: 4
+
+    - codeType: "SYSTEM"
+      code: "USE_CD"
+      name: "사용 여부"
+      remarkText: "사용여부"
+      orderNumber: 3
+      children:
+        - code: "USE"
+          name: "사용"
+          orderNumber: 1
+
+        - code: "UNUSE"
+          name: "미사용"
+          orderNumber: 2
+
+    - codeType: "SYSTEM"
+      code: "BOARD_TYPE_CD"
+      name: "게시판 유형"
+      remarkText: "사용여부"
+      orderNumber: 4
+      children:
+        - code: "NOTICE_BOARD"
+          name: "공지사항"
+          orderNumber: 1
+
+        - code: "FREE_BOARD"
+          name: "자유게시판"
+          orderNumber: 2
+
+    - codeType: "SYSTEM"
+      code: "TICKET_TYPE"
+      name: "티켓 유형"
+      orderNumber: 5
+      children:
+        - code: "COUNSEL_TICKET"
+          name: "상담 티켓"
+          orderNumber: 1
+
+        - code: "CAMPAIGN_TICKET"
+          name: "캠페인 티켓"
+          orderNumber: 2
+
+        - code: "CALLBACK_TICKET"
+          name: "콜백 티켓"
+          orderNumber: 3
+
+    - codeType: "SYSTEM"
+      code: "TICKET_PROCESS_STATUS"
+      name: "처리 상태"
+      orderNumber: 6
+      children:
+        - code: "TICKET_UNPROCESSED"
+          name: "미처리"
+          orderNumber: 1
+
+        - code: "TICKET_IN_PROCESS"
+          name: "처리중"
+          orderNumber: 2
+
+        - code: "TICKET_COMPLETED"
+          name: "처리완료"
+          orderNumber: 3
+
+    - codeType: "SYSTEM"
+      code: "CHANNEL_TYPE"
+      name: "채널 종류"
+      orderNumber: 7
+      children:
+        - code: "VOICE"
+          name: "보이스"
+          orderNumber: 1
+
+        - code: "CHAT"
+          name: "채팅"
+          orderNumber: 2
+
+        - code: "E_MAIL"
+          name: "이메일"
+          orderNumber: 3
+
+    - codeType: "SYSTEM"
+      code: "CHANNEL_CONTACT_TYPE"
+      name: "채널 접촉 유형"
+      orderNumber: 8
+      children:
+        - code: "INBOUND"
+          name: "인바운드"
+          orderNumber: 1
+
+        - code: "OUTBOUND"
+          name: "아웃바운드"
+          orderNumber: 2
+
+        - code: "MANUAL"
+          name: "수기"
+          orderNumber: 3
+
+
+    - codeType: "SYSTEM"
+      code: "NOTIFICATION_TYPE"
+      name: "알림 구분"
+      orderNumber: 9
+      children:
+        - code: "NOTIFI_TYPE_TICKET"
+          name: "티켓"
+          orderNumber: 1
+
+        - code: "NOTIFI_TYPE_NOTICE"
+          name: "공지사항"
+          orderNumber: 2
+
+        - code: "NOTIFI_TYPE_MESSAGE"
+          name: "쪽지"
+          orderNumber: 3
+          
+        - code: "NOTIFI_TYPE_REQUEST"
+          name: "요청"
+          orderNumber: 4
+
+    - codeType: "SYSTEM"
+      code: "NOTIFICATION_SUB_TYPE"
+      name: "알림 세부 구분"
+      orderNumber: 9
+      children:
+        - code: "NOTIFI_SUB_TYPE_ASSIGN_CALLBACK"
+          name: "콜백티켓 할당"
+          orderNumber: 1
+
+        - code: "NOTIFI_SUB_TYPE_TRANSMIT_TICKET"
+          name: "티켓이관"
+          orderNumber: 2
+
+        - code: "NOTIFI_SUB_TYPE_RESERVATION_TICKET"
+          name: "티켓예약알림"
+          orderNumber: 3
+
+        - code: "NOTIFI_SUB_TYPE_NOTICE"
+          name: "공지사항"
+          orderNumber: 4
+
+        - code: "NOTIFI_SUB_TYPE_MESSAGE"
+          name: "쪽지"
+          orderNumber: 5
+          
+        - code: "NOTIFI_SUB_TYPE_INIT_PWD"
+          name: "비밀번호초기화요청"
+          orderNumber: 6
+
+    - codeType: "SYSTEM"
+      code: "COMMAND_TYPE"
+      name: "명령어 유형"
+      orderNumber: 10
+      children:
+        - code: "COMMAND_COUNSEL_TYPE"
+          name: "상담유형"
+          orderNumber: 1
+
+        - code: "COMMAND_TEXT"
+          name: "텍스트"
+          orderNumber: 2
+
+    - codeType: "SYSTEM"
+      code: "SHORT_CUT_KEY_TYPE"
+      name: "단축키 유형"
+      orderNumber: 11
+      children:
+        - code: "SHORT_CUT_SPECIFIC"
+          name: "특정키"
+          orderNumber: 1
+          children:
+            - code: "SPECIFIC_SHIFT"
+              name: "Shift"
+              orderNumber: 1
+
+            - code: "SPECIFIC_ALT"
+              name: "Alt"
+              orderNumber: 2
+
+            - code: "SPECIFIC_CTRL"
+              name: "Ctrl"
+              orderNumber: 3
+
+        - code: "SHORT_CUT_DIGIT"
+          name: "숫자키"
+          orderNumber: 2
+
+        - code: "SHORT_CUT_KEY"
+          name: "일반키"
+          orderNumber: 3
+
+    - codeType: "SYSTEM"
+      code: "ACCESS_TYPE_CODE"
+      name: "접속유형"
+      orderNumber: 12
+      children:
+        - code: "ACCESS_LOGIN"
+          name: "로그인"
+          orderNumber: 1
+
+        - code: "ACCESS_LOGOUT"
+          name: "로그아웃"
+          orderNumber: 2
+          
+        - code: "ACCESS_RENEWAL"
+          name: "로그인 연장"
+          orderNumber: 3
+
+    - codeType: "SYSTEM"
+      code: "MESSAGE_TYPE"
+      name: "알림 구분"
+      orderNumber: 13
+      children:
+        - code: "SEND_MESSAGE"
+          name: "발신"
+          orderNumber: 1
+
+        - code: "RECEIVE_MESSAGE"
+          name: "수신"
+          orderNumber: 2
+
+    - codeType: "SERVICE"
+      code: "COUNSEL_CATEGORY"
+      name: "상담 구분"
+      orderNumber: 1
+      children:
+        - code: "INQUIRY"
+          name: "문의"
+          orderNumber: 1
+
+        - code: "COMPLAINT"
+          name: "불만"
+          orderNumber: 2
+
+        - code: "PARTNERSHIP"
+          name: "제휴"
+          orderNumber: 3
+
+        - code: "OTHER"
+          name: "기타"
+          orderNumber: 4
+
+    - codeType: "SERVICE"
+      code: "CUSTOMER_TYPE"
+      name: "고객유형"
+      orderNumber: 2
+      children:
+        - code: "GENERAL"
+          name: "일반"
+          orderNumber: 1
+
+        - code: "VIP"
+          name: "VIP"
+          orderNumber: 2
+
+        - code: "CAUTION"
+          name: "주의"
+          orderNumber: 3
+
+  roles:
+    - name: "업무 관리"
+      code: "BUSINESS_MANAGEMENT"
+      orderNumber: 1
+      children:
+        - name: "티켓 설정"
+          code: "TICKET_ROLE"
+          orderNumber: 1
+          children:
+            - name: "티켓 조회"
+              code: "TICKET_READ"
+              orderNumber: 1
+
+            - name: "티켓 수정"
+              code: "TICKET_SAVE"
+              orderNumber: 2
+
+            - name: "티켓 추가"
+              code: "TICKET_ADD"
+              orderNumber: 3
+
+            - name: "티켓 삭제"
+              code: "TICKET_DELETE"
+              orderNumber: 4
+
+        - name: "상담유형 설정"
+          code: "COUNSEL_TYPE_ROLE"
+          orderNumber: 2
+          children:
+            - name: "상담유형 조회"
+              code: "COUNSEL_TYPE_READ"
+              orderNumber: 1
+
+            - name: "상담유형 수정"
+              code: "COUNSEL_TYPE_SAVE"
+              orderNumber: 2
+
+            - name: "상담유형 추가"
+              code: "COUNSEL_TYPE_ADD"
+              orderNumber: 3
+
+            - name: "상담유형 삭제"
+              code: "COUNSEL_TYPE_DELETE"
+              orderNumber: 4
+
+        - name: "업체 설정"
+          code: "CUSTOMER_INFO_ROLE"
+          orderNumber: 3
+          children:
+            - name: "업체 조회"
+              code: "CUSTOMER_INFO_READ"
+              orderNumber: 1
+
+            - name: "업체 수정"
+              code: "CUSTOMER_INFO_SAVE"
+              orderNumber: 2
+
+            - name: "업체 추가"
+              code: "CUSTOMER_INFO_ADD"
+              orderNumber: 3
+
+            - name: "업체 삭제"
+              code: "CUSTOMER_INFO_DELETE"
+              orderNumber: 4
+
+        - name: "콜백 설정"
+          code: "CALLBACK_ROLE"
+          orderNumber: 4
+          children:
+            - name: "콜백 조회"
+              code: "CALLBACK_READ"
+              orderNumber: 1
+
+            - name: "콜백 자동 분배"
+              code: "CALLBACK_AUTO"
+              orderNumber: 2
+
+            - name: "콜백 수동 분배"
+              code: "CALLBACK_MANUAL"
+              orderNumber: 3
+
+        - name: "알림 설정"
+          code: "NOTIFICATION_ROLE"
+          orderNumber: 5
+          children:
+            - name: "알림 조회"
+              code: "NOTIFICATION_READ"
+              orderNumber: 1
+
+            - name: "알림 삭제"
+              code: "NOTIFICATION_DELETE"
+              orderNumber: 2
+
+        - name: "쪽지 설정"
+          code: "MESSAGE_ROLE"
+          orderNumber: 6
+          children:
+            - name: "쪽지 조회"
+              code: "MESSAGE_READ"
+              orderNumber: 1
+
+            - name: "쪽지 작성"
+              code: "MESSAGE_WRITE"
+              orderNumber: 2
+
+            - name: "쪽지 삭제"
+              code: "MESSAGE_DELETE"
+              orderNumber: 3
+
+        - name: "스크립트 설정"
+          code: "SCRIPT_ROLE"
+          orderNumber: 7
+          children:
+            - name: "스크립트 조회"
+              code: "SCRIPT_READ"
+              orderNumber: 1
+
+            - name: "스크립트 수정"
+              code: "SCRIPT_SAVE"
+              orderNumber: 2
+
+    - name: "게시판 관리"
+      code: "BOARD_MANAGEMENT"
+      orderNumber: 2
+      children:
+        - name: "게시판 설정"
+          code: "BOARD_ROLE"
+          orderNumber: 1
+          children:
+            - name: "게시판 조회"
+              code: "BOARD_READ"
+              orderNumber: 1
+
+            - name: "게시판 수정"
+              code: "BOARD_SAVE"
+              orderNumber: 2
+
+            - name: "게시판 추가"
+              code: "BOARD_ADD"
+              orderNumber: 3
+
+            - name: "게시판 삭제"
+              code: "BOARD_DELETE"
+              orderNumber: 4
+
+            - name: "카테고리 관리"
+              code: "CATEGORY_MANAGE"
+              orderNumber: 5
+
+        - name: "공지사항 설정"
+          code: "NOTICE_ROLE"
+          orderNumber: 2
+          children:
+            - name: "공지사항 조회"
+              code: "NOTICE_READ"
+              orderNumber: 1
+
+            - name: "공지사항 수정"
+              code: "NOTICE_SAVE"
+              orderNumber: 2
+
+            - name: "공지사항 추가"
+              code: "NOTICE_ADD"
+              orderNumber: 3
+
+            - name: "공지사항 삭제"
+              code: "NOTICE_DELETE"
+              orderNumber: 4
+
+    - name: "티켓 통계 설정"
+      code: "STATISTICS_MANAGEMENT"
+      orderNumber: 3
+      children:
+        - name: "상담유형별 티켓 통계 설정"
+          code: "STATISTICS_COUNSEL_TYPE_ROLE"
+          orderNumber: 1
+          children:
+            - name: "상담유형별 티켓 통계 조회"
+              code: "STATISTICS_COUNSEL_TYPE_READ"
+              orderNumber: 1
+
+        - name: "상담사별 티켓 통계 설정"
+          code: "STATISTICS_USER_ROLE"
+          orderNumber: 2
+          children:
+            - name: "상담사별 티켓 통계 조회"
+              code: "STATISTICS_USER_READ"
+              orderNumber: 1
+              
+    - name: "요청 승인 권한 설정"
+      code: "REQUEST_MANAGEMENT"
+      orderNumber: 4
+      children:
+        - name: "비밀번호 초기화 요청 승인"
+          code: "REQUEST_INIT_PWD_APPROVAL"
+          orderNumber: 1
+
+    - name: "시스템 설정"
+      code: "SETTINGS_MANAGEMENT"
+      orderNumber: 4
+      children:
+        - name: "사용자 설정"
+          code: "USER_ROLE"
+          orderNumber: 1
+          children:
+            - name: "사용자 조회"
+              code: "USER_READ"
+              orderNumber: 1
+
+            - name: "사용자 수정"
+              code: "USER_SAVE"
+              orderNumber: 2
+
+            - name: "사용자 추가"
+              code: "USER_ADD"
+              orderNumber: 3
+
+            - name: "사용자 삭제"
+              code: "USER_DELETE"
+              orderNumber: 4
+
+        - name: "코드 설정"
+          code: "CODE_ROLE"
+          orderNumber: 2
+          children:
+            - name: "서비스 코드 조회"
+              code: "SERVICE_CODE_READ"
+              orderNumber: 1
+
+            - name: "시스템 코드 조회"
+              code: "SYSTEM_CODE_READ"
+              orderNumber: 2
+
+            - name: "코드 수정"
+              code: "CODE_SAVE"
+              orderNumber: 3
+
+            - name: "코드 추가"
+              code: "CODE_ADD"
+              orderNumber: 4
+
+            - name: "코드 삭제"
+              code: "CODE_DELETE"
+              orderNumber: 5
+
+        - name: "권한 설정"
+          code: "PERMISSION_ROLE"
+          orderNumber: 3
+          children:
+            - name: "권한 조회"
+              code: "PERMISSION_READ"
+              orderNumber: 1
+
+            - name: "권한 수정"
+              code: "PERMISSION_SAVE"
+              orderNumber: 2
+
+            - name: "권한 추가"
+              code: "PERMISSION_ADD"
+              orderNumber: 3
+
+            - name: "권한 삭제"
+              code: "PERMISSION_DELETE"
+              orderNumber: 4
+
+            - name: "권한 그룹별 설정"
+              code: "PERMISSION_GROUP_SETTING"
+              orderNumber: 5
+
+        - name: "조직 설정"
+          code: "ORGANIZATION_ROLE"
+          orderNumber: 4
+          children:
+            - name: "조직 조회"
+              code: "ORGANIZATION_READ"
+              orderNumber: 1
+
+            - name: "조직 수정"
+              code: "ORGANIZATION_SAVE"
+              orderNumber: 2
+
+            - name: "조직 추가"
+              code: "ORGANIZATION_ADD"
+              orderNumber: 3
+
+            - name: "조직 삭제"
+              code: "ORGANIZATION_DELETE"
+              orderNumber: 4
+
+        - name: "메뉴 설정"
+          code: "MENU_ROLE"
+          orderNumber: 5
+          children:
+            - name: "메뉴 조회"
+              code: "MENU_READ"
+              orderNumber: 1
+
+            - name: "메뉴 수정"
+              code: "MENU_SAVE"
+              orderNumber: 2
+
+        - name: "시스템 변수 설정"
+          code: "VARIABLE_ROLE"
+          orderNumber: 6
+          children:
+            - name: "시스템 변수 조회"
+              code: "VARIABLE_READ"
+              orderNumber: 1
+
+            - name: "시스템 변수 수정"
+              code: "VARIABLE_SAVE"
+              orderNumber: 2
+
+        - name: "접속 로그 설정"
+          code: "ACCESS_LOG_ROLE"
+          orderNumber: 7
+          children:
+            - name: "접속 로그 조회"
+              code: "ACCESS_LOG_READ"
+              orderNumber: 1
+
+        - name: "사이트 링크 설정"
+          code: "SITE_LINK_ROLE"
+          orderNumber: 8
+          children:
+            - name: "사이트 링크 추가"
+              code: "SITE_LINK_ADD"
+              orderNumber: 1
+
+            - name: "사이트 링크 삭제"
+              code: "SITE_LINK_DELETE"
+              orderNumber: 2
+
+            - name: "사이트 링크 수정"
+              code: "SITE_LINK_SAVE"
+              orderNumber: 3
+
+  menus:
+    - name: "업무 관리"
+      code: "TASK_MANAGE"
+      actionType: "NONE"
+      orderNumber: 1
+      children:
+        - name: "티켓 관리"
+          code: "TICKET_MANAGE"
+          actionType: "TAB"
+          actionId: "task-ticket-management"
+          actionNumber: 9000
+          orderNumber: 1
+          quickUsable: true
+          quickOrderNumber: 1
+
+        - name: "상담유형 관리"
+          code: "CONSULT_TYPE_MANAGE"
+          actionType: "TAB"
+          actionId: "task-consult-type-management"
+          actionNumber: 9000
+          orderNumber: 2
+
+        - name: "업체 관리"
+          code: "COMPANY_MANAGE"
+          actionType: "TAB"
+          actionId: "task-company-management"
+          actionNumber: 9000
+          orderNumber: 3
+
+        - name: "콜백 관리"
+          code: "CALLBACK_MANAGE"
+          actionType: "TAB"
+          actionId: "task-callback-management"
+          actionNumber: 9000
+          orderNumber: 4
+
+        - name: "알림 관리"
+          code: "NOTIFICATION_MANAGE"
+          actionType: "TAB"
+          actionId: "task-notification-management"
+          actionNumber: 9000
+          orderNumber: 5
+
+        - name: "쪽지 관리"
+          code: "MESSAGE_MANAGE"
+          actionType: "TAB"
+          actionId: "task-message-management"
+          actionNumber: 9000
+          orderNumber: 6
+
+        - name: "스크립트 관리"
+          code: "SCRIPT_MANAGE"
+          actionType: "TAB"
+          actionId: "task-script-management"
+          actionNumber: 9000
+          orderNumber: 7
+
+    - name: "게시판 관리"
+      code: "BOARD_MANAGE"
+      actionType: "NONE"
+      orderNumber: 2
+      children:
+        - name: "게시판"
+          code: "BOARD"
+          actionType: "TAB"
+          actionId: "board"
+          actionNumber: 9000
+          orderNumber: 1
+          quickUsable: true
+          quickOrderNumber: 2
+
+        - name: "공지사항"
+          code: "NOTICE"
+          actionType: "TAB"
+          actionId: "notice"
+          actionNumber: 9000
+          orderNumber: 2
+
+    - name: "티켓 통계"
+      code: "TICKET_STATISTICS"
+      actionType: "NONE"
+      orderNumber: 3
+      children:
+        - name: "상담유형별 티켓통계"
+          code: "STATISTICS_BY_COUNSEL_TYPES"
+          actionType: "TAB"
+          actionId: "settings-statistics-by-counsel-types"
+          actionNumber: 9000
+          orderNumber: 1
+
+        - name: "상담사별 티켓통계"
+          code: "STATISTICS_BY_USERS"
+          actionType: "TAB"
+          actionId: "settings-statistics-by-users"
+          actionNumber: 9000
+          orderNumber: 2
+
+    - name: "시스템 설정"
+      code: "SETTINGS_MENU"
+      actionType: "NONE"
+      orderNumber: 4
+      children:
+        - name: "사용자 관리"
+          code: "USER_MANAGEMENT"
+          actionType: "TAB"
+          actionId: "settings-user-management"
+          actionNumber: 9000
+          orderNumber: 1
+          quickUsable: true
+          quickOrderNumber: 3
+
+        - name: "코드 관리"
+          code: "CODE_MANAGEMENT"
+          actionType: "TAB"
+          actionId: "settings-user-management"
+          actionNumber: 9000
+          orderNumber: 2
+
+        - name: "권한 관리"
+          code: "AUTH_ROLE_MANAGEMENT"
+          actionType: "TAB"
+          actionId: "settings-user-management"
+          actionNumber: 9000
+          orderNumber: 3
+
+        - name: "조직 관리"
+          code: "ORGANIZATION_MANAGEMENT"
+          actionType: "TAB"
+          actionId: "settings-organization-management"
+          actionNumber: 9000
+          orderNumber: 4
+
+        - name: "메뉴 관리"
+          code: "MENU_MANAGEMENT"
+          actionType: "TAB"
+          actionId: "settings-menu-management"
+          actionNumber: 9000
+          orderNumber: 5
+
+        - name: "시스템변수 관리"
+          code: "VARIABLE_MANAGEMENT"
+          actionType: "TAB"
+          actionId: "settings-variable-management"
+          actionNumber: 9000
+          orderNumber: 6
+
+        - name: "접속로그 관리"
+          code: "ACCESS_LOG_MANAGEMENT"
+          actionType: "TAB"
+          actionId: "settings-access-log-management"
+          actionNumber: 9000
+          orderNumber: 7
+
+        - name: "사이트링크 관리"
+          code: "SITE_LINK_MANAGEMENT"
+          actionType: "TAB"
+          actionId: "settings-site-link-management"
+          actionNumber: 9000
+          orderNumber: 8

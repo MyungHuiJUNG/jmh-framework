@@ -1,0 +1,39 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    main:
+      url: jdbc:mariadb://localhost:3306/wecoms_dev?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: wecoms_dev
+      password: wecoms_dev
+      driver-class-name: org.mariadb.jdbc.Driver
+      hikari:
+        maximum-pool-size: 5
+        connection-timeout: 20000
+      jpa:
+        show-sql: true
+        hibernate:
+          ddl-auto: update
+          format-sql: false
+com:
+  wecoms24:
+    flow:
+      isMasterServer: true
+      redis:
+        enable: true
+        host: localhost
+        port : 6379
+        broadcaster:
+          enable: true
+          topics:
+            - /topic/regist-notice
+            - /topic/transmit-ticket
+            - /topic/send-message
+            - /topic/callback-ticket
+            - /topic/request/init-password
+      core:
+        file:
+          host: http://localhost:10202
+          urlRootPath: /rest/api/v1/file/files
+          rootPath: /home/flow/uploads

@@ -1,0 +1,56 @@
+{
+  "name": "counsel-flow-app",
+  "version": "1.0.0",
+  "description": "",
+  "productName": "Flow 상담 어플리케이션",
+  "author": "Wecoms Inc.",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.vue ./",
+    "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
+    "test": "echo \"No test specified\" && exit 0",
+    "dev": "quasar dev",
+    "build": "quasar build"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.14",
+    "@rollup/plugin-dynamic-import-vars": "^2.1.2",
+    "axios": "^1.2.1",
+    "copy-webpack-plugin": "^12.0.2",
+    "crypto-js": "^4.2.0",
+    "element-tiptap-vue3-fixed": "^1.2.3",
+    "jquery": "2.2.4",
+    "lodash": "^4.17.21",
+    "luxon": "^3.4.4",
+    "mitt": "^3.0.1",
+    "pinia": "^2.2.8",
+    "puppeteer": "^22.12.0",
+    "quasar": "^2.16.0",
+    "sockjs-client": "^1.6.1",
+    "tabulator-tables": "^6.2.5",
+    "vue": "^3.4.18",
+    "vue-router": "^4.0.12",
+    "vue3-toastify": "^0.2.4",
+    "webstomp-client": "^1.2.6",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@quasar/app-vite": "^1.9.0",
+    "autoprefixer": "^10.4.2",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-vue": "^9.0.0",
+    "postcss": "^8.4.14",
+    "prettier": "^2.5.1",
+    "vite-plugin-checker": "^0.7.1",
+    "vite-plugin-commonjs": "^0.10.3",
+    "vite-plugin-dynamic-import-vars": "^1.0.4",
+    "webpack": "^5.94.0"
+  },
+  "engines": {
+    "node": "^20 || ^18 || ^16",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+}

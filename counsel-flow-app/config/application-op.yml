@@ -1,0 +1,44 @@
+server:
+  port: 8080
+  servlet: 
+    context-path: /
+spring:
+  config:
+    activate:
+      on-profile: op
+  datasource:
+    main:
+      url: jdbc:mariadb://172.25.12.61:3306/flow?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: flow
+      password: flow
+      driver-class-name: org.mariadb.jdbc.Driver
+      hikari:
+        maximum-pool-size: 5
+        connection-timeout: 20000
+      jpa:
+        show-sql: true
+        hibernate:
+          ddl-auto: update
+          format-sql: false
+          
+com:
+   wecoms24:
+      flow:
+         isMasterServer: true
+         redis:
+            enable: true
+            host: 172.25.12.61
+            port: 6379
+            broadcaster:
+               enable: true
+               topics:
+                  - /topic/regist-notice
+                  - /topic/transmit-ticket
+                  - /topic/send-message
+                  - /topic/callback-ticket
+                  - /topic/request/init-password
+         core:
+            file:
+               host: http://172.25.11.61:10202
+               urlRootPath: /rest/api/v1/file/files
+               rootPath: /app/wecoms/uploads

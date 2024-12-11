@@ -1,0 +1,47 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    main:
+      url: jdbc:mariadb://db.wecoms.co.kr:3306/wecoms_staging?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+      username: wecoms
+      password: wecoms
+      driver-class-name: org.mariadb.jdbc.Driver
+      hikari:
+        maximum-pool-size: 5
+        connection-timeout: 20000
+      jpa:
+        show-sql: true
+        hibernate:
+          ddl-auto: update
+          format-sql: false
+    chemp:
+      url: jdbc:mariadb://db.wecoms.co.kr:3306/nechemp?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: nechemp
+      password: nechemp
+      driver-class-name: org.mariadb.jdbc.Driver
+      hikari:
+        maximum-pool-size: 5
+        connection-timeout: 20000
+com:
+   wecoms24:
+      flow:
+         isMasterServer: true
+         redis:
+            enable: true
+            host: 127.0.0.1
+            port: 6379
+            broadcaster:
+               enable: true
+               topics:
+                  - /topic/regist-notice
+                  - /topic/transmit-ticket
+                  - /topic/send-message
+                  - /topic/callback-ticket
+                  - /topic/request/init-password
+         core:
+            file:
+               host: https://flow.wecoms.co.kr
+               urlRootPath: /rest/api/v1/file/files
+               rootPath: /home/flow/uploads
